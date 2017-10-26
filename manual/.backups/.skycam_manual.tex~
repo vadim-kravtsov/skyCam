@@ -1,0 +1,42 @@
+\documentclass[a4paper,12pt,leqno,notitlepage]{article}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsmath,mathtext,textcomp}
+\usepackage[unicode,bookmarksopen=true,pdfborder=0,pdfstartview=FitH]{hyperref}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{longtable}
+%\usepackage{grffile}
+\usepackage{epsfig}
+%\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf}
+\usepackage{verbatim}    %comments like \begin{comment}..... \end{comment}
+\frenchspacing
+\righthyphenmin=2
+\sloppy
+
+
+\usepackage[left=20mm,right=15mm,top=20mm,bottom=20mm,bindingoffset=0cm]{geometry}
+\usepackage{setspace}
+%\textwidth=15.3cm
+%\textheight=25cm
+%\oddsidemargin=1cm
+%\evensidemargin=1cm
+%\renewcommand{\captionlabeldelim}{.} %точка вместо двоеточия в номере таблиц и рисунков
+%\headheight=0.1cm
+%\topmargin=0.1cm
+%\headsep=0.1cm
+\begin{document}
+
+\begin{center}
+  {\Huge Инструкция к камере на телескопе.
+}
+\end{center}
+
+Камера установлена на телескопе на одной направляющей с противовесами и показывает область неба
+диаметром примерно 3.5\degr вокруг поля зрения телескопа.
+
+
+\end{document}

@@ -30,7 +30,11 @@ pressureLabel.set_text('Loading meteoData...')
 
 
 # Initializing the serial port
-serialPort = open_serial_port()
+try:
+    serialPort = open_serial_port()
+    meteoStationIsRunnig = True
+except:
+    meteoStationIsRunnig = False
 # Initializing the camera
 #camera = open_camera()
 
@@ -42,18 +46,17 @@ toShow = empty((720, 576, 3), dtype=int)
 
 running = True
 numOfImages = 4
-t = 0
 tPrev = 0
 while running:
-    t = time.time()
-    tPrev+=1
-    if tPrev>100:
-        meteoData = read_meteoData(serialPort)
-        if meteoData:
-            temperatureLabel.set_text('Temperature = ' + meteoData[0] + u" \u2103")
-            pressureLabel.set_text('Pressure = ' + meteoData[1] + ' mmHg')
-            humidityLabel.set_text('Humidity = ' + meteoData[2] + '%')
-            tPrev = 0
+    if meteoStationIsRunnig:
+        tPrev+=1
+        if tPrev>300:
+            meteoData = read_meteoData(serialPort)
+            if meteoData:
+                temperatureLabel.set_text('Temperature = ' + meteoData[0] + u" \u2103")
+                pressureLabel.set_text('Pressure = ' + meteoData[1] + ' mmHg')
+                humidityLabel.set_text('Humidity = ' + meteoData[2] + '%')
+                tPrev = 0
     for event in pygame.event.get():
         if (event.type == pygame.QUIT) or ((event.type == pygame.KEYDOWN) and (event.key == pygame.K_ESCAPE)):
             running = False

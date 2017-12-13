@@ -25,15 +25,17 @@ fieldRect = FieldRect(display)
 
 
 #temperatureLabel.set_text('Load temperature')
-pressureLabel.set_text('Loading meteoData...')
 #humidityLabel.set_text('Load humidity')
 
 
 # Initializing the serial port
 try:
     serialPort = open_serial_port()
+    pressureLabel.set_text('Loading meteoData...')
     meteoStationIsRunnig = True
 except:
+    temperatureLabel.set_text('Meteostation error:')
+    pressureLabel.set_text('connect device to USB')
     meteoStationIsRunnig = False
 # Initializing the camera
 #camera = open_camera()
@@ -49,14 +51,28 @@ numOfImages = 4
 tPrev = 0
 while running:
     if meteoStationIsRunnig:
-        tPrev+=1
-        if tPrev>300:
-            meteoData = read_meteoData(serialPort)
-            if meteoData:
-                temperatureLabel.set_text('Temperature = ' + meteoData[0] + u" \u2103")
-                pressureLabel.set_text('Pressure = ' + meteoData[1] + ' mmHg')
-                humidityLabel.set_text('Humidity = ' + meteoData[2] + '%')
-                tPrev = 0
+        tPrev = 0
+        meteoData = read_meteoData(serialPort)
+        if meteoData:
+            temperatureLabel.set_text('Temperature = ' + meteoData[0] + ' C')
+            pressureLabel.set_text('Pressure = ' + meteoData[1] + ' mmHg')
+            humidityLabel.set_text('Humidity = ' + meteoData[2] + '%')
+        else:
+            meteoStationIsRunnig = False
+    else:
+        tPrev += 1
+        if tPrev > 10:
+            try:
+                #pressureLabel.set_text('Loading meteoData...')
+                serialPort = open_serial_port()
+                meteoStationIsRunnig = True
+            except:
+                temperatureLabel.set_text('Meteostation error:')
+                pressureLabel.set_text('connect device to USB')
+                humidityLabel.set_text('and reload programm')
+                meteoStationIsRunnig = False
+                pass
+            tPrev = 0
     for event in pygame.event.get():
         if (event.type == pygame.QUIT) or ((event.type == pygame.KEYDOWN) and (event.key == pygame.K_ESCAPE)):
             running = False

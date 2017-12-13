@@ -6,10 +6,10 @@ import pygame
 
 class TextLabel(object):
     def __init__(self, screen, xStart, yStart):
-        self.font = pygame.font.SysFont("monospace", 22)
+        self.font = pygame.font.SysFont(u'ubuntumono', 22)
         self.xStart = xStart
         self.yStart = yStart
-        self.fontColor = pygame.Color("green")
+        self.fontColor = (119,153,51)#pygame.Color("green")
         self.black = pygame.Color("black")
         self.fontSurface = None
         self.screen = screen
@@ -27,10 +27,10 @@ class TextLabel(object):
 
 class MeteoLabel(object):
     def __init__(self, screen, xStart, yStart):
-        self.font = pygame.font.SysFont("monospace", 16)
+        self.font = pygame.font.SysFont(u'ubuntumono', 20)
         self.xStart = xStart
         self.yStart = yStart
-        self.fontColor = pygame.Color("red")
+        self.fontColor = (251,51,51)#pygame.Color("red")
         self.black = pygame.Color("black")
         self.fontSurface = None
         self.screen = screen

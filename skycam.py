@@ -1,5 +1,6 @@
 #! /usr/bin/python2
 
+import argparse
 import pygame
 from pygame import surfarray
 from numpy import empty
@@ -9,6 +10,11 @@ from libs.guiLibs import *
 from libs.photoUtils import *
 from libs.meteoStation import *
 
+#command line argumets
+parser = argparse.ArgumentParser()
+parser add_argument("--fullscreen", action = "store_true", default = False,
+                    help = "Launch the application in a full screen mode")
+args = parser.parse_args()
 
 # Initializing pygame
 pygame.init()
@@ -38,10 +44,10 @@ except:
     pressureLabel.set_text('connect device to USB')
     meteoStationIsRunnig = False
 # Initializing the camera
-#camera = open_camera()
+camera = open_camera()
 
 # Loading previously saved dark file
-#dark = Dark()
+dark = Dark()
 
 
 toShow = empty((720, 576, 3), dtype=int)
@@ -109,11 +115,11 @@ while running:
             if event.key == pygame.K_f:
                 pygame.display.toggle_fullscreen()
                 
-    #newImage = take_median_image( numOfImages)
-    #imageDarkCleaned = dark.clean(newImage)
-    #toShow[:,:,0] = imageDarkCleaned
-    #toShow[:,:,1] = imageDarkCleaned
-    #toShow[:,:,2] = imageDarkCleaned
+    newImage = take_median_image(camera, numOfImages)
+    imageDarkCleaned = dark.clean(newImage)
+    toShow[:,:,0] = imageDarkCleaned
+    toShow[:,:,1] = imageDarkCleaned
+    toShow[:,:,2] = imageDarkCleaned
     surfarray.blit_array(imageSurface, toShow)
     display.blit(imageSurface, (0, 0))
     

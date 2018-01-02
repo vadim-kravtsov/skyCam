@@ -14,7 +14,10 @@ def open_serial_port():
 
 def read_meteoData(serialPort):
 	ser = serialPort
-	data = ser.readline().split()
+	try:
+		data = ser.readline().split()
+	except:
+		return False
 	#while not data: 
 	#	data = ser.readline().split() 
 	if data:
